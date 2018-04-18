@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -10,23 +10,30 @@ import {
   ViewChild
 } from '@angular/core';
 import {INgxSelectOption, NgxSelectComponent} from 'ngx-select-ex';
+
 import * as escapeStringNs from 'escape-string-regexp';
 // import {INgxSelectOption} from '../../lib/ngx-select/ngx-select.interfaces';
 const escapeString = escapeStringNs;
 
 @Component({
   selector: 'app-mytest',
-  templateUrl: './mytest.component.html'
+  templateUrl: './mytest.component.html',
+  styleUrls: ['./mytest.component.css']
 })
 export class MytestComponent implements OnInit, OnDestroy, AfterViewInit {
+
   @ViewChild('selOperadora') selectOperadoras: NgxSelectComponent;
+
 
   @Input() valorPorDefecto;
   @Input() items;
   @Input() field;
   @Input() isRequired;
+  @Input() myId;
+
 
   @Output() valorSeleccionado: EventEmitter<any> = new EventEmitter<any>();
+
 
 
   isDeleted: boolean;
@@ -40,11 +47,9 @@ export class MytestComponent implements OnInit, OnDestroy, AfterViewInit {
       (item.data.ds === search);
   }
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 
   ngOnInit() {
     this.isDeleted = false;
@@ -53,14 +58,17 @@ export class MytestComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.selectOperadoras) {
-      setTimeout(() => this.selectOperadoras.optionsOpen(), 0);
-    }
+            setTimeout(() => this.selectOperadoras.optionsOpen(), 0);
+          }
   }
 
   public doNgxDefault(): any {
+
+
     if (!this.items) {
       return null;
     }
+
 
     let defObj;
     let result;
@@ -112,5 +120,6 @@ export class MytestComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public doSelectOptions = (options: INgxSelectOption[]) => console.log('AppComponent.doSelectOptions', options);
+
 
 }
