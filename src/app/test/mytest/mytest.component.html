@@ -4,6 +4,8 @@
     <!--[formControl]="ngxControl"-->
     <ngx-select
       #selOperadora
+      id="{{myId}}"
+      [class]="'form-control'"
       [searchCallback]="searchCallback"
       [allowClear]="true"
       [defaultValue]="doNgxDefault()"
@@ -25,8 +27,9 @@
     <div *ngIf="isDeleted">
       <div type="danger">
         La operadora es obligatoria
-        </div>
+      </div>
     </div>
     <div>
     </div>
   </div>
+</div>
